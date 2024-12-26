@@ -17,32 +17,41 @@
     };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, hyprland, home-manager, nvf, ... }@inputs:
-   let
-     system = "x86_64-linux";
-     pkgs = import nixpkgs {
-       inherit system;
-       config = {
-         allowUnfree = true;
-       };
-     };
-   in
-   {
-     nixosConfigurations = {
-       maximal = nixpkgs.lib.nixosSystem {
-         specialArgs = {inherit inputs system;};
-         modules = [
-           ./hosts/maximal/configuration.nix
-           inputs.home-manager.nixosModules.default
+  outputs =
+    {
+      self,
+      nixpkgs,
+      hyprland,
+      home-manager,
+      nvf,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in
+    {
+      nixosConfigurations = {
+        maximal = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs system;
+          };
+          modules = [
+            ./hosts/maximal/configuration.nix
+            inputs.home-manager.nixosModules.default
 
-         ];
-       };
-     };
-   };
+          ];
+        };
+      };
+    };
 }

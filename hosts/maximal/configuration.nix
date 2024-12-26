@@ -65,7 +65,6 @@
     printing.enable = true;
 
     #sound
-    rtkit.enable = true;
     pipewire.enable = true;
 
     # Enable touchpad support
@@ -111,8 +110,6 @@
       swww
       rofi-wayland
       home-manager
-      keepassxc
-      syncthing
     ];
 
     variables.EDITOR = "nvim";
@@ -139,6 +136,8 @@
   };
 
   system.stateVersion = "24.05";
+
+  security.rtkit.enable = true;
 
   ######################## ################################
 
