@@ -10,7 +10,7 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ../../modules/home-manager/hyprland/hyprland.nix
-    #../../modules/home-manager/nixvim/default.nix
+    ../../modules/home-manager/nixvim/default.nix
   ];
 
   home = {
